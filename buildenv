@@ -1,6 +1,6 @@
 # Update bump details accordingly. Use bump check to confirm.
 # bump: glib-version /GLIB_VERSION="(.*)"/ https://github.com/GNOME/glib.git|re:/\b\d+\.\d+\.\d+\b/|semver:*
-GLIB_VERSION="2.87.0" # Specify a stable release
+GLIB_VERSION="2.89.4" # Specify a stable release
 export ZOPEN_STABLE_TAG="${GLIB_VERSION}"
 
 ###
