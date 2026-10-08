@@ -1,8 +1,8 @@
 diff --git a/glib/gfileutils.c b/glib/gfileutils.c
-index 8b70ddd..047c74d 100644
+index 37c2888..191a520 100644
 --- a/glib/gfileutils.c
 +++ b/glib/gfileutils.c
-@@ -938,7 +938,7 @@ get_contents_posix (const gchar  *filename,
+@@ -939,7 +939,7 @@ get_contents_posix (const gchar  *filename,
        FILE *f;
        gboolean retval;
  
@@ -12,7 +12,7 @@ index 8b70ddd..047c74d 100644
        if (f == NULL)
          {
 diff --git a/glib/glib-private.h b/glib/glib-private.h
-index 94ea7e8..17cbf33 100644
+index ac97142..0828810 100644
 --- a/glib/glib-private.h
 +++ b/glib/glib-private.h
 @@ -64,7 +64,7 @@
@@ -25,20 +25,20 @@ index 94ea7e8..17cbf33 100644
  
  #define HAS_DYNAMIC_ASAN_LOADING
 diff --git a/glib/glib-unix.c b/glib/glib-unix.c
-index 0f0588e..0406c2f 100644
+index 24a20df..c5eab8d 100644
 --- a/glib/glib-unix.c
 +++ b/glib/glib-unix.c
 @@ -952,7 +952,7 @@ char *
  g_unix_fd_query_path (int      fd,
                        GError **error)
  {
--#if defined(__linux__) || defined(__sun)
-+#if defined(__linux__) || defined(__sun) || defined(__MVS__)
+-#if defined(__linux__) || defined(__sun) || defined(_AIX) || defined (__CYGWIN__)
++#if defined(__linux__) || defined(__sun) || defined(__MVS__) || defined(_AIX) || defined (__CYGWIN__)
    char *path;
    char *proc_path;
  
 diff --git a/glib/gutils.c b/glib/gutils.c
-index 02da41b..6fe2f5b 100644
+index 42eb9fe..ade6e1b 100644
 --- a/glib/gutils.c
 +++ b/glib/gutils.c
 @@ -734,7 +734,7 @@ g_get_user_database_entry (void)

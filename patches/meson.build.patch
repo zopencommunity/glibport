@@ -1,5 +1,5 @@
 diff --git a/meson.build b/meson.build
-index f30ca58..f40c946 100644
+index efa7e89..de6e267 100644
 --- a/meson.build
 +++ b/meson.build
 @@ -18,12 +18,12 @@ fs = import('fs')
@@ -7,7 +7,7 @@ index f30ca58..f40c946 100644
  c_standards = {}
  
 -foreach std : ['89', '99', '11', '17', '23']
--  arg = (cc.get_id() == 'msvc' ? '/std:' : '-std=') + 'c' + std
+-  arg = (cc.get_argument_syntax() == 'msvc' ? '/std:' : '-std=') + 'c' + std
 -  if cc.has_argument(arg)
 -    c_standards += { std: arg }
 -  endif
@@ -21,11 +21,11 @@ index f30ca58..f40c946 100644
  
  # In the 2.85 cycle, this soft-dependency on C11 will become a hard dependency.
  # If this is a problem on your toolchain or platform, please file an issue
-@@ -2287,7 +2287,11 @@ subproject('gvdb', default_options: {'tests': false})
+@@ -2299,7 +2299,11 @@ subproject('gvdb', default_options: {'tests': false})
  gvdb_dep = dependency('gvdb')
  
  libm = cc.find_library('m', required : false)
--libffi_dep = dependency('libffi', version : '>= 3.0.0', default_options: {'werror': false})
+-libffi_dep = dependency('libffi', version : '>= 3.0.0', default_options: {'werror': false, 'tests': false, 'doc': false})
 +libffi_dep = dependency('libffi',
 +  version : '>= 3.0.0',
 +  fallback : ['libffi', 'libffi_dep'],

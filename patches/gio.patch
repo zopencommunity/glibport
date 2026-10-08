@@ -34,10 +34,10 @@ index 6838775..8930b6c 100644
          }
      }
 diff --git a/gio/glocalfile.c b/gio/glocalfile.c
-index 8e20e70..49e60a6 100644
+index 995efd6..d353464 100644
 --- a/gio/glocalfile.c
 +++ b/gio/glocalfile.c
-@@ -101,6 +101,7 @@
+@@ -104,6 +104,7 @@
  #endif
  #endif
  
@@ -45,7 +45,7 @@ index 8e20e70..49e60a6 100644
  
  static void g_local_file_file_iface_init (GFileIface *iface);
  
-@@ -236,6 +237,31 @@ _g_local_file_new (const char *filename)
+@@ -239,6 +240,31 @@ _g_local_file_new (const char *filename)
    return G_FILE (local);
  }
  
@@ -78,7 +78,7 @@ index 8e20e70..49e60a6 100644
   * g_local_file_new_from_dirname_and_basename:
   * @dirname: an absolute, canonical directory name
 diff --git a/gio/glocalfileinfo.c b/gio/glocalfileinfo.c
-index 2c0ebde..f69dc0f 100644
+index eea2668..2beaf5e 100644
 --- a/gio/glocalfileinfo.c
 +++ b/gio/glocalfileinfo.c
 @@ -1186,7 +1186,7 @@ lookup_uid_data (uid_t uid)
@@ -116,7 +116,7 @@ index 60fbb4b..2e427a8 100644
  /**
   * GResolver:
 diff --git a/gio/gsocket.c b/gio/gsocket.c
-index 0a2a523..7719d4a 100644
+index 4fd1d9e..93608de 100644
 --- a/gio/gsocket.c
 +++ b/gio/gsocket.c
 @@ -82,6 +82,8 @@
@@ -129,7 +129,7 @@ index 0a2a523..7719d4a 100644
   * GSocket:
   *
 diff --git a/gio/gthreadedresolver.c b/gio/gthreadedresolver.c
-index 78740b0..228a719 100644
+index 1ee543c..ecee817 100644
 --- a/gio/gthreadedresolver.c
 +++ b/gio/gthreadedresolver.c
 @@ -41,6 +41,8 @@
@@ -142,10 +142,10 @@ index 78740b0..228a719 100644
  #include <ifaddrs.h>
  #endif
 diff --git a/gio/gunixmounts.c b/gio/gunixmounts.c
-index 45a9389..eb1143d 100644
+index 014c4ef..71e1c10 100644
 --- a/gio/gunixmounts.c
 +++ b/gio/gunixmounts.c
-@@ -549,7 +549,65 @@ create_unix_mount_point (const char *device_path,
+@@ -511,7 +511,65 @@ create_unix_mount_point (const char *device_path,
  }
  
  /* mntent.h (Linux, GNU, NSS) {{{2 */
@@ -212,7 +212,7 @@ index 45a9389..eb1143d 100644
  
  #ifdef HAVE_LIBMOUNT
  
-@@ -1176,7 +1234,57 @@ get_fstab_file (void)
+@@ -1138,7 +1196,57 @@ get_fstab_file (void)
  }
  
  /* mntent.h (Linux, GNU, NSS) {{{2 */
@@ -271,7 +271,7 @@ index 45a9389..eb1143d 100644
  
  #ifdef HAVE_LIBMOUNT
  
-@@ -3835,8 +3943,7 @@ g_unix_mount_point_guess_can_eject (GUnixMountPoint *mount_point)
+@@ -3797,8 +3905,7 @@ g_unix_mount_point_guess_can_eject (GUnixMountPoint *mount_point)
  }
  
  /* Utility functions {{{1 */
@@ -282,10 +282,10 @@ index 45a9389..eb1143d 100644
  static void
  _canonicalize_filename (gchar *filename)
 diff --git a/gio/meson.build b/gio/meson.build
-index 201d293..adac5fc 100644
+index 7adfd0e..c74222f 100644
 --- a/gio/meson.build
 +++ b/gio/meson.build
-@@ -785,22 +785,22 @@ install_headers(gio_headers, install_dir : gio_includedir)
+@@ -805,22 +805,22 @@ install_headers(gio_headers, install_dir : gio_includedir)
  # in PATH, which means you can't bootstrap glib with its own glib-mkenums.
  gioenumtypes_h = custom_target('gioenumtypes_h',
    output : 'gioenumtypes.h',
