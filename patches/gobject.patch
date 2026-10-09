@@ -1,8 +1,8 @@
 diff --git a/gobject/meson.build b/gobject/meson.build
-index 91823af..6470af2 100644
+index 9690e7c..7027405 100644
 --- a/gobject/meson.build
 +++ b/gobject/meson.build
-@@ -116,23 +116,23 @@ glib_enumtypes_input_headers = files(
+@@ -124,23 +124,23 @@ glib_enumtypes_input_headers = files(
  
  glib_enumtypes_h = custom_target('glib_enumtypes_h',
    output : 'glib-enumtypes.h',

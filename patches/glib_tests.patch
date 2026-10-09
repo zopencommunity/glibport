@@ -1,3 +1,18 @@
+diff --git a/glib/tests/gdatetime.c b/glib/tests/gdatetime.c
+index e1cc397..44b46e7 100644
+--- a/glib/tests/gdatetime.c
++++ b/glib/tests/gdatetime.c
+@@ -3740,8 +3740,8 @@ test_unix_localtime (LocaltimeFixture *fixture,
+ #ifndef G_OS_UNIX
+   g_test_skip ("unix specific behaviour, skipping test on non-unix");
+   return;
+-#elif !defined(HAVE_UNSHARE)
+-  g_test_skip ("requires Linux unshare() syscall, skipping test");
++#elif !defined(HAVE_UNSHARE) || !defined(CLONE_NEWUSER)
++  g_test_skip ("requires Linux unshare(CLONE_NEWUSER) syscall, skipping test");
+   return;
+ #else
+ #ifdef _GLIB_ADDRESS_SANITIZER
 diff --git a/glib/tests/include.c b/glib/tests/include.c
 index 1325266..29418ab 100644
 --- a/glib/tests/include.c
@@ -10,11 +25,24 @@ index 1325266..29418ab 100644
  #undef _GNU_SOURCE
  #undef _XOPEN_SOURCE
  #include <pthread.h>
+diff --git a/glib/tests/string.c b/glib/tests/string.c
+index 3d92296..ab40098 100644
+--- a/glib/tests/string.c
++++ b/glib/tests/string.c
+@@ -348,7 +348,7 @@ test_string_prepend_c (void)
+   string = g_string_new ("hi pete!");
+ 
+   for (i = 0; i < 10000; i++)
+-    g_string_prepend_c (string, 'a'+(i%26));
++    g_string_prepend_c (string, (gchar) ('a'+(i%26)));
+ 
+   g_assert((strlen("hi pete!") + 10000) == string->len);
+   g_assert((strlen("hi pete!") + 10000) == strlen(string->str));
 diff --git a/glib/tests/testing.c b/glib/tests/testing.c
-index fd541b0..7fa98e1 100644
+index eaa5b08..e1136a5 100644
 --- a/glib/tests/testing.c
 +++ b/glib/tests/testing.c
-@@ -42,6 +42,31 @@
+@@ -43,6 +43,31 @@
  #include <unistd.h>
  #endif
  
@@ -46,7 +74,7 @@ index fd541b0..7fa98e1 100644
  #define TAP_VERSION G_STRINGIFY (14)
  #define TAP_SUBTEST_PREFIX "    "
  
-@@ -453,7 +478,11 @@ test_subprocess_stdin (void)
+@@ -468,7 +493,11 @@ test_subprocess_stdin (void)
      }
  
    /* Temporarily override this process’ stdin with a pipe. */
